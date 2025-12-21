@@ -1,0 +1,211 @@
+/* Resume-specific styles - Fixed A4 size, pt/mm units only */
+
+/* A4 dimensions: 210mm × 297mm */
+/* Standard margins: 15mm on all sides = 180mm × 267mm content area */
+
+.resume-a4-container {
+  /* Fixed A4 size - no responsive sizing */
+  width: 210mm;
+  min-height: 297mm;
+  max-width: 210mm;
+  max-height: none;
+  
+  /* ATS-safe font - Inter or Arial fallback */
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Arial', 'Helvetica Neue', sans-serif;
+  font-size: 11pt;
+  line-height: 1.5;
+  color: #000000;
+  
+  /* Fixed padding in mm */
+  padding: 15mm;
+  
+  /* Background */
+  background: #ffffff;
+  
+  /* No transforms, no scaling */
+  transform: none !important;
+  zoom: 1 !important;
+}
+
+/* Screen view - scaled down for preview */
+@media screen {
+  .resume-a4-container {
+    /* Fixed A4 size on screen - no transform scaling */
+    /* A4 = 210mm = 794px at 96dpi */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e5e7eb;
+  }
+  
+  .resume-preview-wrapper {
+    /* Container for preview - allows scrolling */
+    width: 100%;
+    max-width: 794px; /* 210mm at 96dpi */
+    overflow: auto;
+  }
+}
+
+/* Print styles - exact A4, no scaling */
+@media print {
+          * {
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+          }
+  
+  body {
+    margin: 0 !important;
+    padding: 0 !important;
+    background: white !important;
+  }
+  
+  .resume-a4-container {
+    /* Lock to A4 in print */
+    width: 210mm !important;
+    min-height: 297mm !important;
+    max-width: 210mm !important;
+    padding: 15mm !important;
+    margin: 0 !important;
+    
+    /* No scaling in print */
+    transform: none !important;
+    zoom: 1 !important;
+    scale: 1 !important;
+    
+    /* ATS-safe font */
+    font-family: 'Inter', 'Arial', 'Helvetica Neue', sans-serif !important;
+    font-size: 11pt !important;
+    line-height: 1.5 !important;
+    color: #000000 !important;
+    background: #ffffff !important;
+  }
+  
+  @page {
+    size: A4;
+    margin: 0;
+  }
+  
+  /* Typography - all in pt */
+  .resume-header h1 {
+    font-size: 24pt !important;
+    line-height: 1.2 !important;
+    margin-bottom: 6pt !important;
+    font-weight: 600 !important;
+    color: #000000 !important;
+  }
+  
+  .resume-contact {
+    font-size: 9pt !important;
+    line-height: 1.4 !important;
+    color: #000000 !important;
+  }
+  
+  .section-heading {
+    font-size: 12pt !important;
+    line-height: 1.3 !important;
+    font-weight: 600 !important;
+    margin-bottom: 8pt !important;
+    padding-bottom: 3pt !important;
+    color: #000000 !important;
+    border-bottom: 1pt solid #000000 !important;
+    page-break-after: avoid !important;
+  }
+  
+  .resume-section {
+    margin-bottom: 12pt !important;
+    page-break-inside: avoid !important;
+  }
+  
+  .resume-section h3 {
+    font-size: 11pt !important;
+    line-height: 1.4 !important;
+    font-weight: 600 !important;
+    margin-bottom: 3pt !important;
+    color: #000000 !important;
+    page-break-after: avoid !important;
+  }
+  
+  .resume-section p {
+    font-size: 10pt !important;
+    line-height: 1.5 !important;
+    color: #000000 !important;
+    margin-bottom: 4pt !important;
+  }
+  
+  .resume-section li {
+    font-size: 10pt !important;
+    line-height: 1.5 !important;
+    color: #000000 !important;
+    margin-bottom: 2pt !important;
+  }
+  
+  .resume-section ul {
+    margin-left: 8mm !important;
+    padding-left: 0 !important;
+  }
+  
+  /* Prevent text overlap */
+  .resume-section > div {
+    page-break-inside: avoid !important;
+    margin-bottom: 8pt !important;
+  }
+  
+  /* Hide non-printable elements */
+  button,
+  .no-print,
+  .template-selector {
+    display: none !important;
+  }
+}
+
+/* Screen typography - using pt for consistency */
+.resume-header h1 {
+  font-size: 24pt;
+  line-height: 1.2;
+  margin-bottom: 6pt;
+  font-weight: 600;
+}
+
+.resume-contact {
+  font-size: 9pt;
+  line-height: 1.4;
+}
+
+.section-heading {
+  font-size: 12pt;
+  line-height: 1.3;
+  font-weight: 600;
+  margin-bottom: 8pt;
+  padding-bottom: 3pt;
+}
+
+.resume-section {
+  margin-bottom: 12pt;
+}
+
+.resume-section h3 {
+  font-size: 11pt;
+  line-height: 1.4;
+  font-weight: 600;
+  margin-bottom: 3pt;
+}
+
+.resume-section p {
+  font-size: 10pt;
+  line-height: 1.5;
+  margin-bottom: 4pt;
+}
+
+.resume-section li {
+  font-size: 10pt;
+  line-height: 1.5;
+  margin-bottom: 2pt;
+}
+
+.resume-section ul {
+  margin-left: 8mm;
+  padding-left: 0;
+}
+
+.resume-section > div {
+  margin-bottom: 8pt;
+}
+
