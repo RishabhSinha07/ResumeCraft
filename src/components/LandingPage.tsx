@@ -164,24 +164,82 @@ export default function LandingPage() {
         className="container mx-auto px-6 py-20"
       >
         <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold mb-4">Built for Top Candidates</h2>
+            <p className="text-muted-foreground">
+              See how a real student resume transforms with our templates.
+            </p>
+          </div>
+
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="rounded-3xl border-2 border-border/50 bg-card p-8 shadow-2xl"
+            className="rounded-xl border border-border/50 bg-white p-8 md:p-12 shadow-2xl overflow-hidden relative"
           >
-            <div className="space-y-6">
-              <div className="border-b border-border pb-4">
-                <h2 className="text-3xl font-bold mb-2">John Doe</h2>
-                <p className="text-muted-foreground">Software Engineering Student</p>
+            {/* Decorative elements */}
+            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500" />
+
+            <div className="space-y-6 text-left">
+              {/* Header */}
+              <div className="border-b border-gray-100 pb-6">
+                <h1 className="text-4xl font-bold tracking-tight text-gray-900 mb-2">Alex Rivera</h1>
+                <div className="flex flex-wrap gap-x-3 text-sm text-gray-500 font-medium">
+                  <span>San Francisco, CA</span>
+                  <span className="text-gray-300">•</span>
+                  <span>alex.rivera@example.com</span>
+                  <span className="text-gray-300">•</span>
+                  <span>linkedin.com/in/arivera</span>
+                  <span className="text-gray-300">•</span>
+                  <span>github.com/arivera</span>
+                </div>
               </div>
+
+              {/* Education */}
               <div>
-                <h3 className="text-lg font-semibold mb-2">Education</h3>
-                <p className="text-muted-foreground">Bachelor of Science in Computer Science</p>
+                <h3 className="text-xs font-bold uppercase tracking-wider text-blue-600 mb-3">Education</h3>
+                <div className="flex justify-between items-baseline mb-1">
+                  <h4 className="font-bold text-gray-900">University of Washington</h4>
+                  <span className="text-sm text-gray-500">May 2025</span>
+                </div>
+                <div className="flex justify-between items-baseline">
+                  <p className="text-sm text-gray-700">B.S. Computer Science</p>
+                  <span className="text-sm text-gray-500 font-medium">GPA: 3.8/4.0</span>
+                </div>
               </div>
+
+              {/* Experience */}
               <div>
-                <h3 className="text-lg font-semibold mb-2">Experience</h3>
-                <p className="text-muted-foreground">Software Engineering Intern at Tech Company</p>
+                <h3 className="text-xs font-bold uppercase tracking-wider text-blue-600 mb-4">Experience</h3>
+                
+                <div className="mb-5">
+                  <div className="flex justify-between items-baseline mb-1">
+                    <h4 className="font-bold text-gray-900">Vercel</h4>
+                    <span className="text-sm text-gray-500">June 2024 – Aug 2024</span>
+                  </div>
+                  <p className="text-sm font-semibold text-gray-700 mb-2">Software Engineering Intern</p>
+                  <ul className="list-disc list-outside ml-4 space-y-1.5 text-sm text-gray-600 leading-relaxed">
+                    <li>Optimized Next.js image optimization pipeline, reducing First Contentful Paint (FCP) by <span className="font-semibold text-gray-900">25%</span> for 10k+ deployments.</li>
+                    <li>Implemented a new caching strategy using Redis, decreasing database load by <span className="font-semibold text-gray-900">40%</span> during peak traffic.</li>
+                    <li>Collaborated with design team to migrate legacy components to a new internal design system.</li>
+                  </ul>
+                </div>
+              </div>
+
+              {/* Projects */}
+              <div>
+                <h3 className="text-xs font-bold uppercase tracking-wider text-blue-600 mb-3">Projects</h3>
+                
+                <div>
+                  <div className="flex justify-between items-baseline mb-1">
+                    <h4 className="font-bold text-gray-900">CloudScale Monitor</h4>
+                    <span className="text-sm text-gray-500">github.com/arivera/cloudscale</span>
+                  </div>
+                  <ul className="list-disc list-outside ml-4 space-y-1.5 text-sm text-gray-600 leading-relaxed">
+                    <li>Developed a serverless infrastructure monitoring tool using AWS Lambda, DynamoDB, and TypeScript.</li>
+                    <li>Architected an event-driven notification system that alerts users via Slack/Email within 500ms.</li>
+                  </ul>
+                </div>
               </div>
             </div>
           </motion.div>
@@ -190,4 +248,3 @@ export default function LandingPage() {
     </div>
   )
 }
-
