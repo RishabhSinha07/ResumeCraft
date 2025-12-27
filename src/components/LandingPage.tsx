@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import { ArrowRight, Check, Sparkles } from 'lucide-react'
 import { Button } from './ui/button'
 import { useNavigate } from 'react-router-dom'
+import { Footer } from './Footer'
 
 export default function LandingPage() {
   const navigate = useNavigate()
@@ -245,6 +246,9 @@ export default function LandingPage() {
           </motion.div>
         </div>
       </motion.div>
+
+      {/* Footer */}
+      <Footer />
     </div>
   )
 }

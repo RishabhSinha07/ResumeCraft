@@ -12,6 +12,7 @@ import AchievementsStep from '../components/builder/AchievementsStep'
 import ResumePreview from '../components/ResumePreview'
 import TemplateSelector from '../components/TemplateSelector'
 import { exportToPDF } from '../utils/export'
+import { Footer } from '../components/Footer'
 
 const steps = [
   { id: 0, name: 'Personal Info', component: PersonalInfoStep },
@@ -66,6 +67,7 @@ export default function BuilderPage() {
         <div className="flex justify-center items-start p-8 bg-muted/30 min-h-screen">
           <ResumePreview />
         </div>
+        <Footer />
       </div>
     )
   }
@@ -162,8 +164,8 @@ export default function BuilderPage() {
             </div>
           </div>
         </div>
+        <Footer />
       </div>
     </div>
   )
 }
-
