@@ -100,7 +100,7 @@ export default function LandingPage() {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="mb-20"
           >
-            <p className="text-sm text-muted-foreground mb-6">Trusted by students at</p>
+            <p className="text-sm text-muted-foreground mb-6">Trusted by professionals at</p>
             <div className="flex flex-wrap justify-center items-center gap-8 opacity-60">
               {['Google', 'Meta', 'Amazon', 'Microsoft', 'Apple', 'Netflix'].map((company, i) => (
                 <motion.div
@@ -212,7 +212,7 @@ export default function LandingPage() {
               {/* Experience */}
               <div>
                 <h3 className="text-xs font-bold uppercase tracking-wider text-blue-600 mb-4">Experience</h3>
-                
+
                 <div className="mb-5">
                   <div className="flex justify-between items-baseline mb-1">
                     <h4 className="font-bold text-gray-900">Vercel</h4>
@@ -230,7 +230,7 @@ export default function LandingPage() {
               {/* Projects */}
               <div>
                 <h3 className="text-xs font-bold uppercase tracking-wider text-blue-600 mb-3">Projects</h3>
-                
+
                 <div>
                   <div className="flex justify-between items-baseline mb-1">
                     <h4 className="font-bold text-gray-900">CloudScale Monitor</h4>
