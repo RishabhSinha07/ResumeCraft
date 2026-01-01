@@ -13,6 +13,7 @@ import ResumePreview from '../components/ResumePreview'
 import TemplateSelector from '../components/TemplateSelector'
 import { exportToPDF } from '../utils/export'
 import { Footer } from '../components/Footer'
+import ATSValidator from '../components/ATSValidator'
 
 const steps = [
   { id: 0, name: 'Personal Info', component: PersonalInfoStep },
@@ -54,10 +55,13 @@ export default function BuilderPage() {
                 <ChevronLeft className="w-4 h-4 mr-2" />
                 Back to Editor
               </Button>
-              <Button onClick={handleExport}>
-                <Download className="w-4 h-4 mr-2" />
-                Export PDF
-              </Button>
+              <div className="flex gap-2">
+                <ATSValidator />
+                <Button onClick={handleExport}>
+                  <Download className="w-4 h-4 mr-2" />
+                  Export PDF
+                </Button>
+              </div>
             </div>
             <div className="max-w-4xl mx-auto">
               <TemplateSelector />
@@ -149,14 +153,17 @@ export default function BuilderPage() {
             <div className="rounded-2xl border bg-card p-4 shadow-lg">
               <div className="mb-4 flex justify-between items-center">
                 <h3 className="font-semibold">Live Preview</h3>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => setShowPreview(true)}
-                >
-                  <Eye className="w-4 h-4 mr-2" />
-                  Full Screen
-                </Button>
+                <div className="flex gap-2">
+                  <ATSValidator />
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => setShowPreview(true)}
+                  >
+                    <Eye className="w-4 h-4 mr-2" />
+                    Full Screen
+                  </Button>
+                </div>
               </div>
               <div className="resume-preview-wrapper overflow-auto max-h-[800px] bg-white rounded-xl p-6">
                 <ResumePreview />

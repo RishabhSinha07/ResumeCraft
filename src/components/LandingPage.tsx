@@ -152,6 +152,61 @@ export default function LandingPage() {
               </motion.div>
             ))}
           </motion.div>
+
+          {/* New Feature Highlight */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            className="mt-20 rounded-3xl bg-gradient-to-r from-violet-600 to-indigo-600 p-8 md:p-12 text-white overflow-hidden relative"
+          >
+            <div className="relative z-10 flex flex-col md:flex-row items-center gap-8 md:gap-12">
+              <div className="flex-1 text-center md:text-left">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-white/90 text-sm font-medium mb-6">
+                  <Sparkles className="w-4 h-4" />
+                  <span>New Feature</span>
+                </div>
+                <h2 className="text-3xl font-bold mb-4">Real-Time ATS Validation</h2>
+                <p className="text-white/80 text-lg mb-8">
+                  Don't let algorithms reject you. Our built-in ATS checker analyzes your resume against 20+ best practices and gives you a score with actionable improvements.
+                </p>
+                <Button
+                  size="lg"
+                  variant="secondary"
+                  onClick={() => navigate('/builder')}
+                  className="bg-white text-indigo-600 hover:bg-white/90"
+                >
+                  Check my Score
+                </Button>
+              </div>
+              <div className="flex-1 w-full max-w-md bg-white/10 rounded-xl p-6 backdrop-blur-sm border border-white/20">
+                <div className="flex items-center justify-between mb-4 border-b border-white/10 pb-4">
+                  <span className="font-semibold">ATS Compatibility</span>
+                  <span className="px-2 py-0.5 rounded bg-green-500/20 text-green-300 text-sm font-mono font-bold">98/100</span>
+                </div>
+                <div className="space-y-3">
+                  <div className="flex gap-3 text-sm items-start">
+                    <div className="p-1 rounded bg-green-500/20 mt-0.5">
+                      <Check className="w-3 h-3 text-green-400" />
+                    </div>
+                    <span className="text-white/90">Action verbs used in experience</span>
+                  </div>
+                  <div className="flex gap-3 text-sm items-start">
+                    <div className="p-1 rounded bg-green-500/20 mt-0.5">
+                      <Check className="w-3 h-3 text-green-400" />
+                    </div>
+                    <span className="text-white/90">Contact info is complete</span>
+                  </div>
+                  <div className="flex gap-3 text-sm items-start">
+                    <div className="p-1 rounded bg-green-500/20 mt-0.5">
+                      <Check className="w-3 h-3 text-green-400" />
+                    </div>
+                    <span className="text-white/90">Skills section optimized</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </div>
 
@@ -167,7 +222,7 @@ export default function LandingPage() {
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold mb-4">Built for Top Candidates</h2>
-            <p className="text-muted-foreground">
+            <p className="text-muted-foreground mb-4">
               See how a real student resume transforms with our templates.
             </p>
           </div>
@@ -245,6 +300,7 @@ export default function LandingPage() {
             </div>
           </motion.div>
         </div>
+
       </motion.div>
 
       {/* Footer */}
