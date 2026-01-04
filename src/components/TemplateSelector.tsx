@@ -23,6 +23,18 @@ const templates = [
     description: 'Sophisticated and refined',
     preview: 'Serif fonts, classic typography',
   },
+  {
+    id: 'modern-creative',
+    name: 'Modern Creative',
+    description: 'Fresh and dynamic',
+    preview: 'Two-column layout with sidebar and accents',
+  },
+  {
+    id: 'executive',
+    name: 'Executive Impact',
+    description: 'High-level and authoritative',
+    preview: 'Strong hierarchy, focus on results',
+  },
 ]
 
 export default function TemplateSelector() {

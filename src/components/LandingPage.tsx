@@ -3,9 +3,155 @@ import { ArrowRight, Check, Sparkles } from 'lucide-react'
 import { Button } from './ui/button'
 import { useNavigate } from 'react-router-dom'
 import { Footer } from './Footer'
+import { useState } from 'react'
+import { ResumeTemplate } from './templates/ResumeTemplate'
+import type { ResumeData } from '../types/resume'
+import { cn } from '../lib/utils'
+
+const DUMMY_RESUME_DATA: ResumeData = {
+  personalInfo: {
+    fullName: 'Alex Rivera',
+    email: 'alex.rivera@example.com',
+    phone: '+1 (555) 012-3456',
+    location: 'San Francisco, CA',
+    linkedin: 'linkedin.com/in/alex-rivera-tech',
+    github: 'github.com/arivera-dev',
+    portfolio: 'arivera.dev',
+  },
+  education: [
+    {
+      id: '1',
+      school: 'University of Washington',
+      degree: 'B.S.',
+      field: 'Computer Science',
+      startDate: 'Sept 2021',
+      endDate: 'May 2025',
+      gpa: '3.92',
+      description: 'Relevant Coursework: Distributed Systems, Operating Systems, Machine Learning, Data Structures & Algorithms.',
+    },
+    {
+      id: '2',
+      school: 'Stanford University (Online)',
+      degree: 'Professional Certificate',
+      field: 'Advanced Software Architecture',
+      startDate: 'June 2023',
+      endDate: 'Aug 2023',
+    },
+  ],
+  experience: [
+    {
+      id: '1',
+      company: 'Vercel',
+      position: 'Software Engineering Intern',
+      location: 'San Francisco, CA',
+      startDate: 'June 2024',
+      endDate: 'Aug 2024',
+      current: false,
+      description: [
+        'Optimized Next.js image optimization pipeline, reducing First Contentful Paint (FCP) by 25% for 10k+ deployments.',
+        'Implemented a new caching strategy using Redis, decreasing database load by 40% during peak traffic.',
+        'Collaborated with the core framework team to migrate 50+ legacy components to a new internal design system.',
+      ],
+    },
+    {
+      id: '2',
+      company: 'TechStart Solutions',
+      position: 'Full Stack Developer Intern',
+      location: 'Seattle, WA',
+      startDate: 'Jan 2024',
+      endDate: 'May 2024',
+      current: false,
+      description: [
+        'Developed and maintained 15+ RESTful API endpoints using Node.js and Express, serving 5,000+ daily active users.',
+        'Redesigned the client dashboard using React and Tailwind CSS, improving user engagement metrics by 15%.',
+        'Streamlined CI/CD pipelines using GitHub Actions, reducing deployment time from 12 minutes to 4 minutes.',
+      ],
+    },
+    {
+      id: '3',
+      company: 'UW Open Source Lab',
+      position: 'Lead Contributor',
+      location: 'Seattle, WA',
+      startDate: 'Sept 2023',
+      endDate: 'Dec 2023',
+      current: false,
+      description: [
+        'Led a team of 5 student developers to build an open-source campus navigation tool using React Native.',
+        'Integrated Google Maps API and implemented custom pathfinding algorithms for indoor routing.',
+      ],
+    },
+  ],
+  projects: [
+    {
+      id: '1',
+      name: 'CloudScale Monitor',
+      description: 'A comprehensive serverless infrastructure monitoring tool that tracks metrics in real-time across multiple cloud providers.',
+      technologies: ['AWS', 'TypeScript', 'React', 'Node.js', 'Grafana'],
+      github: 'github.com/arivera/cloudscale',
+      link: 'cloudscale-monitor.io',
+    },
+    {
+      id: '2',
+      name: 'AI Resume Parser',
+      description: 'An intelligent ATS-optimization tool that uses LLMs to analyze resumes against job descriptions and suggest real-time improvements.',
+      technologies: ['Python', 'OpenAI', 'FastAPI', 'Next.js', 'PostgreSQL'],
+      github: 'github.com/arivera/resume-ai',
+    },
+  ],
+  skills: [
+    { id: '1', name: 'React/Next.js', category: 'Frontend' },
+    { id: '2', name: 'TypeScript', category: 'Languages' },
+    { id: '3', name: 'Node.js/Express', category: 'Backend' },
+    { id: '4', name: 'Python/FastAPI', category: 'Backend' },
+    { id: '5', name: 'AWS (Lambda, S3)', category: 'Cloud' },
+    { id: '6', name: 'Docker/Kubernetes', category: 'DevOps' },
+    { id: '7', name: 'PostgreSQL/Redis', category: 'Database' },
+    { id: '8', name: 'System Design', category: 'Architecture' },
+  ],
+  achievements: [
+    {
+      id: '1',
+      title: 'First Place - UW Tech Hub Hackathon',
+      description: 'Won the "Best Social Impact" award for a community-driven sustainability app.',
+      date: 'Oct 2023',
+    },
+    {
+      id: '2',
+      title: 'Dean\'s List',
+      description: 'Recognized for outstanding academic achievement for 6 consecutive quarters.',
+      date: '2021 - 2024',
+    },
+    {
+      id: '3',
+      title: 'Open Source Contributor of the Year',
+      description: 'Awarded by the Computer Science department for significant contributions to the university\'s OS projects.',
+      date: '2023',
+    },
+  ],
+  template: 'minimal',
+  theme: {
+    font: 'inter',
+    spacing: 'normal',
+    color: 'blue',
+  },
+}
+
+const previewTemplates = [
+  { id: 'minimal', name: 'Minimal' },
+  { id: 'tech-focused', name: 'Tech Focused' },
+  { id: 'elegant-professional', name: 'Professional' },
+  { id: 'modern-creative', name: 'Creative' },
+  { id: 'executive', name: 'Executive' },
+]
 
 export default function LandingPage() {
   const navigate = useNavigate()
+  const [selectedTemplate, setSelectedTemplate] = useState('minimal')
+
+  const resumeData = {
+    ...DUMMY_RESUME_DATA,
+    template: selectedTemplate,
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-primary/5">
@@ -222,82 +368,54 @@ export default function LandingPage() {
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold mb-4">Built for Top Candidates</h2>
-            <p className="text-muted-foreground mb-4">
+            <p className="text-muted-foreground mb-8">
               See how a real student resume transforms with our templates.
             </p>
+
+            <div className="flex flex-wrap justify-center gap-3 mb-12">
+              {previewTemplates.map((template) => (
+                <button
+                  key={template.id}
+                  onClick={() => setSelectedTemplate(template.id)}
+                  className={cn(
+                    "px-4 py-2 rounded-full text-sm font-medium transition-all border",
+                    selectedTemplate === template.id
+                      ? "bg-primary text-primary-foreground border-primary shadow-lg shadow-primary/25"
+                      : "bg-background text-muted-foreground border-border hover:border-primary/50"
+                  )}
+                >
+                  {template.name}
+                </button>
+              ))}
+            </div>
           </div>
 
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="rounded-xl border border-border/50 bg-white p-8 md:p-12 shadow-2xl overflow-hidden relative"
+            className="overflow-hidden p-6 md:p-12 flex justify-center min-h-[500px] max-h-[800px] relative"
           >
-            {/* Decorative elements */}
-            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500" />
+            {/* Full Size Resume (No Scale) */}
+            <div className="resume-a4-container shadow-2xl" style={{ margin: 0 }}>
+              <ResumeTemplate data={resumeData} />
+            </div>
 
-            <div className="space-y-6 text-left">
-              {/* Header */}
-              <div className="border-b border-gray-100 pb-6">
-                <h1 className="text-4xl font-bold tracking-tight text-gray-900 mb-2">Alex Rivera</h1>
-                <div className="flex flex-wrap gap-x-3 text-sm text-gray-500 font-medium">
-                  <span>San Francisco, CA</span>
-                  <span className="text-gray-300">•</span>
-                  <span>alex.rivera@example.com</span>
-                  <span className="text-gray-300">•</span>
-                  <span>linkedin.com/in/arivera</span>
-                  <span className="text-gray-300">•</span>
-                  <span>github.com/arivera</span>
-                </div>
-              </div>
-
-              {/* Education */}
-              <div>
-                <h3 className="text-xs font-bold uppercase tracking-wider text-blue-600 mb-3">Education</h3>
-                <div className="flex justify-between items-baseline mb-1">
-                  <h4 className="font-bold text-gray-900">University of Washington</h4>
-                  <span className="text-sm text-gray-500">May 2025</span>
-                </div>
-                <div className="flex justify-between items-baseline">
-                  <p className="text-sm text-gray-700">B.S. Computer Science</p>
-                  <span className="text-sm text-gray-500 font-medium">GPA: 3.8/4.0</span>
-                </div>
-              </div>
-
-              {/* Experience */}
-              <div>
-                <h3 className="text-xs font-bold uppercase tracking-wider text-blue-600 mb-4">Experience</h3>
-
-                <div className="mb-5">
-                  <div className="flex justify-between items-baseline mb-1">
-                    <h4 className="font-bold text-gray-900">Vercel</h4>
-                    <span className="text-sm text-gray-500">June 2024 – Aug 2024</span>
-                  </div>
-                  <p className="text-sm font-semibold text-gray-700 mb-2">Software Engineering Intern</p>
-                  <ul className="list-disc list-outside ml-4 space-y-1.5 text-sm text-gray-600 leading-relaxed">
-                    <li>Optimized Next.js image optimization pipeline, reducing First Contentful Paint (FCP) by <span className="font-semibold text-gray-900">25%</span> for 10k+ deployments.</li>
-                    <li>Implemented a new caching strategy using Redis, decreasing database load by <span className="font-semibold text-gray-900">40%</span> during peak traffic.</li>
-                    <li>Collaborated with design team to migrate legacy components to a new internal design system.</li>
-                  </ul>
-                </div>
-              </div>
-
-              {/* Projects */}
-              <div>
-                <h3 className="text-xs font-bold uppercase tracking-wider text-blue-600 mb-3">Projects</h3>
-
-                <div>
-                  <div className="flex justify-between items-baseline mb-1">
-                    <h4 className="font-bold text-gray-900">CloudScale Monitor</h4>
-                    <span className="text-sm text-gray-500">github.com/arivera/cloudscale</span>
-                  </div>
-                  <ul className="list-disc list-outside ml-4 space-y-1.5 text-sm text-gray-600 leading-relaxed">
-                    <li>Developed a serverless infrastructure monitoring tool using AWS Lambda, DynamoDB, and TypeScript.</li>
-                    <li>Architected an event-driven notification system that alerts users via Slack/Email within 500ms.</li>
-                  </ul>
-                </div>
+            {/* Float Button just before the end of the visible section */}
+            <div className="absolute inset-x-0 bottom-12 flex justify-center pointer-events-none z-20">
+              <div className="pointer-events-auto">
+                <Button
+                  size="lg"
+                  onClick={() => navigate('/builder')}
+                  className="shadow-2xl scale-110 px-8 py-6 text-lg"
+                >
+                  Try this template
+                </Button>
               </div>
             </div>
+
+            {/* Subtle fade at the bottom */}
+            <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-background via-background/40 to-transparent pointer-events-none" />
           </motion.div>
         </div>
 

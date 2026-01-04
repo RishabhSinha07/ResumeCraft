@@ -22,9 +22,9 @@
   /* Background */
   background: #ffffff;
   
-  /* No transforms, no scaling */
-  transform: none !important;
-  zoom: 1 !important;
+  /* No transforms, no scaling by default */
+  transform: none;
+  zoom: 1;
 }
 
 /* Screen view - scaled down for preview */
