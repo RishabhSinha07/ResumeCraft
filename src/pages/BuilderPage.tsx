@@ -47,7 +47,7 @@ export default function BuilderPage() {
 
   if (showPreview) {
     return (
-      <div className="min-h-screen bg-background">
+      <>
         <div className="sticky top-0 z-10 bg-background/80 backdrop-blur-sm border-b">
           <div className="container mx-auto px-6 py-4">
             <div className="flex justify-between items-center mb-4">
@@ -72,12 +72,12 @@ export default function BuilderPage() {
           <ResumePreview />
         </div>
         <Footer />
-      </div>
+      </>
     )
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background to-primary/5">
+    <>
       <div className="container mx-auto px-6 py-8">
         {/* Progress Bar */}
         <div className="mb-8">
@@ -173,6 +173,6 @@ export default function BuilderPage() {
         </div>
         <Footer />
       </div>
-    </div>
+    </>
   )
 }

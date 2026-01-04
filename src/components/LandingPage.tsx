@@ -154,7 +154,10 @@ export default function LandingPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background to-primary/5">
+    <>
+      {/* Fade to background at bottom of hero - preserved for transition effect */}
+      <div className="absolute inset-x-0 bottom-0 h-[30%] bg-gradient-to-t from-background to-transparent pointer-events-none" />
+
       {/* Navigation */}
       <nav className="container mx-auto px-6 py-6">
         <div className="flex items-center justify-between">
@@ -423,6 +426,6 @@ export default function LandingPage() {
 
       {/* Footer */}
       <Footer />
-    </div>
+    </>
   )
 }

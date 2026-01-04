@@ -49,6 +49,7 @@
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
@@ -61,13 +62,13 @@
     .resume-wrapper {
       page-break-after: avoid;
     }
-    
+
     /* Ensure text is selectable and ATS-readable */
     .resume-container {
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
     }
-    
+
     /* Prevent awkward page breaks */
     .resume-section {
       orphans: 3;
