@@ -35,6 +35,12 @@ const templates = [
     description: 'High-level and authoritative',
     preview: 'Strong hierarchy, focus on results',
   },
+  {
+    id: 'strategic-impact',
+    name: 'Strategic Impact',
+    description: 'Grid-based layout for high-achievers',
+    preview: 'Three-column achievements, condensed text',
+  },
 ]
 
 export default function TemplateSelector() {

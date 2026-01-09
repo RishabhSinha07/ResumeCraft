@@ -80,5 +80,6 @@ export interface ResumeStore {
   setTheme: (theme: ResumeData['theme']) => void
   setCurrentStep: (step: number) => void
   reorderSection: (section: keyof ResumeData, fromIndex: number, toIndex: number) => void
+  setResumeData: (data: ResumeData) => void
 }
 

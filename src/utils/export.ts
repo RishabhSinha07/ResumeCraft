@@ -14,7 +14,7 @@ export async function exportToPDF() {
 
   // Create a new window for printing
   const printWindow = window.open('', '_blank')
-  
+
   if (!printWindow) {
     alert('Please allow popups to export your resume.')
     return
@@ -22,7 +22,7 @@ export async function exportToPDF() {
 
   // Clone the resume element with all styles
   const clonedElement = previewElement.cloneNode(true) as HTMLElement
-  
+
   // Inline critical styles for print reliability
   clonedElement.style.width = '210mm'
   clonedElement.style.minHeight = '297mm'
@@ -32,7 +32,7 @@ export async function exportToPDF() {
   clonedElement.style.zoom = '1'
   clonedElement.style.background = 'white'
   clonedElement.style.fontFamily = "'Inter', 'Arial', 'Helvetica Neue', sans-serif"
-  
+
   // Write the print document with A4-specific styles
   printWindow.document.write(`
     <!DOCTYPE html>
@@ -105,26 +105,27 @@ export async function exportToPDF() {
             page-break-after: avoid !important;
           }
           
+          /* Optimized Print Layout */
           .resume-section {
-            margin-bottom: 12pt !important;
-            page-break-inside: avoid !important;
+            margin-bottom: 6pt !important;
+            page-break-inside: auto !important; /* Allow section to split across pages */
           }
           
           .resume-section h3 {
             font-size: 11pt !important;
             line-height: 1.4 !important;
             font-weight: 600 !important;
-            margin-bottom: 3pt !important;
+            margin-bottom: 2pt !important;
             color: #000000 !important;
-            page-break-after: avoid !important;
+            page-break-after: avoid !important; /* Keep header with content */
           }
           
           .resume-section p,
           .resume-section li {
             font-size: 10pt !important;
-            line-height: 1.5 !important;
+            line-height: 1.4 !important;
             color: #000000 !important;
-            margin-bottom: 2pt !important;
+            margin-bottom: 1pt !important;
           }
           
           .resume-section ul {
@@ -132,9 +133,23 @@ export async function exportToPDF() {
             padding-left: 0 !important;
           }
           
-          .resume-section > div {
-            page-break-inside: avoid !important;
-            margin-bottom: 8pt !important;
+          /* Keep individual items (Job, Project) together */
+          .resume-section > div,
+          .break-inside-avoid {
+             page-break-inside: avoid !important;
+             break-inside: avoid !important;
+             margin-bottom: 6pt !important;
+          }
+
+          /* Ensure flex gaps work in print */
+          .flex {
+            display: flex !important;
+          }
+          .flex-col {
+            flex-direction: column !important;
+          }
+          .gap-2 {
+            gap: 0.5rem !important;
           }
         </style>
       </head>
@@ -153,6 +168,6 @@ export async function exportToPDF() {
       </body>
     </html>
   `)
-  
+
   printWindow.document.close()
 }

@@ -9,19 +9,19 @@
   min-height: 297mm;
   max-width: 210mm;
   max-height: none;
-  
+
   /* ATS-safe font - Inter or Arial fallback */
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Arial', 'Helvetica Neue', sans-serif;
   font-size: 11pt;
   line-height: 1.5;
   color: #000000;
-  
+
   /* Fixed padding in mm */
   padding: 15mm;
-  
+
   /* Background */
   background: #ffffff;
-  
+
   /* No transforms, no scaling by default */
   transform: none;
   zoom: 1;
@@ -35,28 +35,29 @@
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
     border: 1px solid #e5e7eb;
   }
-  
+
   .resume-preview-wrapper {
     /* Container for preview - allows scrolling */
     width: 100%;
-    max-width: 794px; /* 210mm at 96dpi */
+    max-width: 794px;
+    /* 210mm at 96dpi */
     overflow: auto;
   }
 }
 
 /* Print styles - exact A4, no scaling */
 @media print {
-          * {
-            -webkit-print-color-adjust: exact !important;
-            print-color-adjust: exact !important;
-          }
-  
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
   body {
     margin: 0 !important;
     padding: 0 !important;
     background: white !important;
   }
-  
+
   .resume-a4-container {
     /* Lock to A4 in print */
     width: 210mm !important;
@@ -64,12 +65,12 @@
     max-width: 210mm !important;
     padding: 15mm !important;
     margin: 0 !important;
-    
+
     /* No scaling in print */
     transform: none !important;
     zoom: 1 !important;
     scale: 1 !important;
-    
+
     /* ATS-safe font */
     font-family: 'Inter', 'Arial', 'Helvetica Neue', sans-serif !important;
     font-size: 11pt !important;
@@ -77,12 +78,12 @@
     color: #000000 !important;
     background: #ffffff !important;
   }
-  
+
   @page {
     size: A4;
     margin: 0;
   }
-  
+
   /* Typography - all in pt */
   .resume-header h1 {
     font-size: 24pt !important;
@@ -91,13 +92,13 @@
     font-weight: 600 !important;
     color: #000000 !important;
   }
-  
+
   .resume-contact {
     font-size: 9pt !important;
     line-height: 1.4 !important;
     color: #000000 !important;
   }
-  
+
   .section-heading {
     font-size: 12pt !important;
     line-height: 1.3 !important;
@@ -108,46 +109,54 @@
     border-bottom: 1pt solid #000000 !important;
     page-break-after: avoid !important;
   }
-  
+
   .resume-section {
-    margin-bottom: 12pt !important;
-    page-break-inside: avoid !important;
+    margin-bottom: 6pt !important;
+    /* Reduced from 12pt */
+    page-break-inside: auto !important;
+    /* ALLOW breaking inside sections */
   }
-  
+
   .resume-section h3 {
     font-size: 11pt !important;
     line-height: 1.4 !important;
     font-weight: 600 !important;
-    margin-bottom: 3pt !important;
+    margin-bottom: 2pt !important;
     color: #000000 !important;
     page-break-after: avoid !important;
   }
-  
+
   .resume-section p {
     font-size: 10pt !important;
-    line-height: 1.5 !important;
-    color: #000000 !important;
-    margin-bottom: 4pt !important;
-  }
-  
-  .resume-section li {
-    font-size: 10pt !important;
-    line-height: 1.5 !important;
+    line-height: 1.4 !important;
+    /* Reduced */
     color: #000000 !important;
     margin-bottom: 2pt !important;
+    /* Reduced */
   }
-  
+
+  .resume-section li {
+    font-size: 10pt !important;
+    line-height: 1.4 !important;
+    color: #000000 !important;
+    margin-bottom: 1pt !important;
+    /* Reduced */
+  }
+
   .resume-section ul {
     margin-left: 8mm !important;
     padding-left: 0 !important;
   }
-  
-  /* Prevent text overlap */
-  .resume-section > div {
+
+  /* Prevent text overlap but allow flow */
+  .resume-section>div {
     page-break-inside: avoid !important;
-    margin-bottom: 8pt !important;
+    /* Keep individual entries together */
+    margin-bottom: 6pt !important;
+    /* Reduced from 8pt */
+    break-inside: avoid !important;
   }
-  
+
   /* Hide non-printable elements */
   button,
   .no-print,
@@ -205,7 +214,6 @@
   padding-left: 0;
 }
 
-.resume-section > div {
+.resume-section>div {
   margin-bottom: 8pt;
 }
-

@@ -1,12 +1,14 @@
 import { motion } from 'framer-motion'
-import { ArrowRight, Check, Sparkles } from 'lucide-react'
+import { ArrowRight, Check, Sparkles, Upload, Loader2 } from 'lucide-react'
 import { Button } from './ui/button'
 import { useNavigate } from 'react-router-dom'
 import { Footer } from './Footer'
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { ResumeTemplate } from './templates/ResumeTemplate'
 import type { ResumeData } from '../types/resume'
 import { cn } from '../lib/utils'
+import { useResumeStore } from '../store/resumeStore'
+import { parseResumeFromPdf } from '../utils/pdfImporter'
 
 const DUMMY_RESUME_DATA: ResumeData = {
   personalInfo: {
@@ -142,11 +144,70 @@ const previewTemplates = [
   { id: 'elegant-professional', name: 'Professional' },
   { id: 'modern-creative', name: 'Creative' },
   { id: 'executive', name: 'Executive' },
+  { id: 'strategic-impact', name: 'Strategic Impact' },
 ]
+
+const EMPTY_RESUME_DATA: ResumeData = {
+  personalInfo: {
+    fullName: '',
+    email: '',
+    phone: '',
+    location: '',
+    linkedin: '',
+    github: '',
+    portfolio: '',
+  },
+  education: [],
+  experience: [],
+  projects: [],
+  skills: [],
+  achievements: [],
+  template: 'minimal',
+  theme: {
+    font: 'inter',
+    spacing: 'normal',
+    color: 'blue',
+  },
+}
 
 export default function LandingPage() {
   const navigate = useNavigate()
+  const { setResumeData: setGlobalResumeData } = useResumeStore()
   const [selectedTemplate, setSelectedTemplate] = useState('minimal')
+  const [isImporting, setIsImporting] = useState(false)
+  const fileInputRef = useRef<HTMLInputElement>(null)
+
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (!file) return
+
+    try {
+      setIsImporting(true)
+      const importedData = await parseResumeFromPdf(file)
+
+      // Use empty structure to avoid dummy data pollution
+      const fullData: ResumeData = {
+        ...EMPTY_RESUME_DATA,
+        personalInfo: { ...EMPTY_RESUME_DATA.personalInfo, ...importedData.personalInfo },
+        education: importedData.education || [],
+        experience: importedData.experience || [],
+        skills: importedData.skills || [],
+        projects: importedData.projects || [],
+        achievements: importedData.achievements || [],
+        template: 'strategic-impact',
+        theme: EMPTY_RESUME_DATA.theme
+      }
+
+      setGlobalResumeData(fullData)
+      navigate('/builder')
+    } catch (error) {
+      console.error('Failed to import PDF:', error)
+      alert('Failed to read PDF. Please try a different file.')
+    } finally {
+      setIsImporting(false)
+      if (fileInputRef.current) fileInputRef.current.value = ''
+    }
+  }
 
   const resumeData = {
     ...DUMMY_RESUME_DATA,
@@ -155,7 +216,6 @@ export default function LandingPage() {
 
   return (
     <>
-      {/* Fade to background at bottom of hero - preserved for transition effect */}
       <div className="absolute inset-x-0 bottom-0 h-[30%] bg-gradient-to-t from-background to-transparent pointer-events-none" />
 
       {/* Navigation */}
@@ -220,26 +280,55 @@ export default function LandingPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16"
           >
-            <Button
-              size="lg"
-              onClick={() => navigate('/builder')}
-              className="group"
-            >
-              Build my resume
-              <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              onClick={() => {
-                const element = document.getElementById('preview')
-                element?.scrollIntoView({ behavior: 'smooth' })
-              }}
-            >
-              See preview
-            </Button>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
+              <Button
+                size="lg"
+                onClick={() => navigate('/builder')}
+                className="group"
+              >
+                Build my resume
+                <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </Button>
+
+              <input
+                type="file"
+                ref={fileInputRef}
+                className="hidden"
+                accept=".pdf"
+                onChange={handleFileChange}
+              />
+
+              <Button
+                size="lg"
+                variant="outline"
+                onClick={() => fileInputRef.current?.click()}
+                disabled={isImporting}
+              >
+                {isImporting ? (
+                  <>
+                    <Loader2 className="mr-2 w-4 h-4 animate-spin" />
+                    Importing...
+                  </>
+                ) : (
+                  <>
+                    <Upload className="mr-2 w-4 h-4" />
+                    Import PDF
+                  </>
+                )}
+              </Button>
+
+              <Button
+                size="lg"
+                variant="ghost"
+                onClick={() => {
+                  const element = document.getElementById('preview')
+                  element?.scrollIntoView({ behavior: 'smooth' })
+                }}
+              >
+                See preview
+              </Button>
+            </div>
           </motion.div>
 
           {/* Social Proof */}
