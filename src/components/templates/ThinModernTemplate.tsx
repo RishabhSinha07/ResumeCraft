@@ -73,7 +73,7 @@ export function ThinModernTemplate({ data }: ThinModernTemplateProps) {
                                 </div>
                             </div>
 
-                            <ul style={{ margin: '0 0 0 16pt', padding: 0 }}>
+                            <ul style={{ margin: '0 0 0 16pt', padding: 0, listStyleType: 'disc', listStylePosition: 'outside' }}>
                                 {exp.description.map((desc, i) => (
                                     <li key={i} style={{ fontSize: '10pt', marginBottom: '2pt', fontWeight: 300 }}>{desc}</li>
                                 ))}
