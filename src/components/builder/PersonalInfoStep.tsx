@@ -1,5 +1,6 @@
 import { useResumeStore } from '../../store/resumeStore'
 import { Input } from '../ui/input'
+import { Textarea } from '../ui/textarea'
 import { Label } from '../ui/label'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card'
 
@@ -81,6 +82,16 @@ export default function PersonalInfoStep() {
             value={personalInfo.portfolio || ''}
             onChange={(e) => handleChange('portfolio', e.target.value)}
             placeholder="johndoe.com"
+          />
+        </div>
+        <div className="space-y-2">
+          <Label htmlFor="summary">Professional Summary</Label>
+          <Textarea
+            id="summary"
+            value={personalInfo.summary || ''}
+            onChange={(e) => handleChange('summary', e.target.value)}
+            placeholder="A brief summary of your professional background and goals..."
+            rows={4}
           />
         </div>
       </CardContent>

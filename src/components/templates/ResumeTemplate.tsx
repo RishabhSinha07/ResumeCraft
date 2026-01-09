@@ -4,7 +4,7 @@ import { TechFocusedTemplate } from './TechFocusedTemplate'
 import { ElegantProfessionalTemplate } from './ElegantProfessionalTemplate'
 import { ModernCreativeTemplate } from './ModernCreativeTemplate'
 import { ExecutiveTemplate } from './ExecutiveTemplate'
-import { StrategicImpactTemplate } from './StrategicImpactTemplate'
+import { ThinModernTemplate } from './ThinModernTemplate'
 
 interface ResumeTemplateProps {
   data: ResumeData
@@ -24,8 +24,8 @@ export function ResumeTemplate({ data }: ResumeTemplateProps) {
       return <ModernCreativeTemplate data={data} />
     case 'executive':
       return <ExecutiveTemplate data={data} />
-    case 'strategic-impact':
-      return <StrategicImpactTemplate data={data} />
+    case 'thin-modern':
+      return <ThinModernTemplate data={data} />
     default:
       return <MinimalTemplate data={data} />
   }

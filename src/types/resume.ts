@@ -6,6 +6,7 @@ export interface PersonalInfo {
   linkedin?: string
   github?: string
   portfolio?: string
+  summary?: string
 }
 
 export interface Education {

@@ -36,6 +36,12 @@ const templates = [
     preview: 'Strong hierarchy, focus on results',
   },
   {
+    id: 'thin-modern',
+    name: 'Thin Modern',
+    description: 'Elegant thin fonts with summary at top',
+    preview: 'Thin fonts, clean layout with summary',
+  },
+  {
     id: 'strategic-impact',
     name: 'Strategic Impact',
     description: 'Grid-based layout for high-achievers',
